@@ -1,0 +1,107 @@
+<head>
+  <title>copenhagen</title>
+</head>
+
+<body>
+  
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Trip to Copenhagen</h1>  
+    </div>
+      {{> image_add_form}}
+      {{> modal}}
+      {{> images}}
+      
+  </div>
+</body>
+
+<template name="image_add_form">
+  <div class="row">
+    <div class="modal fade" id="image_add_form" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="col-xs-10">
+              <h3>Add Image</h3>
+            </div>
+            <div class="col-xs-2">
+              <span class="js-close-form glyphicon glyphicon-remove btn-lg text-center" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="modal-body">
+            <form class="js-add-image">
+              <div class="form-group">
+                <label for="img_src">Image URL:</label>
+                <input type="text" class="form-control" name="img_src"/>
+                <br/>
+              </div>
+              <div class="form-group">
+                <label for="label">Image Label:</label>
+                <input type="text" class="form-control" name="label"/>
+                <br/>
+              </div>
+              <div class="form-group">
+                <label for="description">Image Description:</label>
+                <input type="text" class="form-control" name="description"/>
+                <br/>
+              </div>
+              <button class="btn btn-success">Save</button>
+            </form>            
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</template>
+
+<template name="images">
+  <div class="row">
+    <div class="col-xs-12" style="padding-bottom: 10px;">
+      <button class="js-image-add btn btn-success">Add Image</button>
+    </div>
+  </div>
+  {{#each images}}
+    {{> imagesRow }}
+  {{/each}}
+</template>
+
+<template name="imagesRow">
+  <div class="row">
+    {{#each row }}
+      {{> individualImage }}
+    {{/each}}
+  </div>
+</template>
+
+<template name="individualImage">
+  <div class="col-xs-12 col-md-3" id="{{_id}}" style="padding-bottom: 10px;">
+    <div class="thumbnail">
+      <img class= "js-image" src="{{img_src}}" alt="{{img_alt}}"/>
+    </div>
+    <div class="caption">
+      <h3>{{label}}</h3>
+      <p>{{description}}</p>
+      <p>{{> starsRating rating=rating mutable=true class="js-rate-image" id=_id}}</p>
+      <p>Rating: {{rating}}</p>
+      <button class="js-del-image btn btn-warning">delete</button>
+    </div>
+  </div>
+</template>
+
+<template name="modal">
+  <div class="row">
+    <div id="imageModal" class="modal fade" role="dialog">
+      <div class="modal-dialog"  style="width:80%">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img  id="image_modal" style="width:100%" src="{{src}}" />
+            <div class="close-glyph">
+                <img class="close" data-dismiss="modal" src="close.png"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
