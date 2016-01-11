@@ -17,3 +17,9 @@ Create Mongo Collections
 Use Mongo find and insert operations
 Control a Bootstrap modal from Meteor
 Use third party Meteor packages to add functionality
+
+Week 3:
+(done) Add user authentication to your Meteor app
+    Use Mongo filters
+    Use the Meteor reactive session variable
+    Implement an infinite scroll
