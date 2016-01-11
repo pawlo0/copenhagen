@@ -5,21 +5,26 @@ by University of London, Goldsmiths, University of London
 
 My pratice during lessons.
 
-Week 1:
-Install Meteor tools
-Create and run a Meteor application
-Edit a template
-Define a template helper
-Define template event listeners
+Week 1 (Introduction to Meteor.js):
+Introduction
+From one to many users
+Install Meteor
+Editing a template
+Sending data to templates with helpers
+Convert to a Bootstrap grid
+Responding to user actions
+Introduction to Meteor Summary
 
-Week 2:
-Create Mongo Collections
-Use Mongo find and insert operations
-Control a Bootstrap modal from Meteor
-Use third party Meteor packages to add functionality
+Week 2 (Databases and collections):
+Introduction
+Meteor distributed data model
+Create a collection of images
+Better start up script, removing items from a collection
+Add an image rating function: Updating and sorting
+Implement image adding with a Bootstrap Modal
+Databases and collections summary
 
 Week 3:
-(done) Add user authentication to your Meteor app
-    Use Mongo filters
-    Use the Meteor reactive session variable
-    Implement an infinite scroll
+User authentication with Meteor.js
+Tidying up the design with a navbar
+Accessing user information

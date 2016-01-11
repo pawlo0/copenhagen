@@ -6,6 +6,10 @@
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <br/>
+      
+      {{#if currentUser}}
+        Welcome,
+      {{/if}}
       {{> loginButtons}}
     </div>
   </nav>
@@ -63,7 +67,9 @@
 <template name="images">
   <div class="row">
     <div class="col-xs-12" style="padding-bottom: 10px;">
+      {{#if currentUser}}
       <button class="js-image-add btn btn-success">Add Image</button>
+      {{/if}}
     </div>
   </div>
   {{#each images}}

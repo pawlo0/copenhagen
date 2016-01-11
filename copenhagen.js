@@ -3,6 +3,14 @@ Images = new Mongo.Collection("images");
 
 if (Meteor.isClient) {
 
+  Template.body.helpers({
+    username: function(){
+      if (Meteor.user()){
+        return Meteor.user().emails[0].address;  
+      }
+    }  
+  });
+  
   Template.images.helpers({
     images: function () {
         var all = Images.find({}, {sort:{createdOn: -1, rating:-1}}).fetch();
