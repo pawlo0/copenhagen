@@ -30,6 +30,15 @@ if (Meteor.isClient) {
         return chunks;
     }
   });
+  Template.individualImage.helpers({
+    getUser: function(userId) {
+      if (userId) {
+        return Meteor.users.findOne({_id: userId}).username
+      } else {
+        return "System"
+      }
+    }
+  });
   
   Template.images.events({
     "click .js-image": function(event){
@@ -57,14 +66,17 @@ if (Meteor.isClient) {
   
   Template.image_add_form.events({
     'submit .js-add-image':function(event){
-
-      Images.insert({
-        img_src: event.target.img_src.value,
-        img_alt: event.target.label.value,
-        label: event.target.label.value,
-        description: event.target.description.value,
-        createdOn: new Date()
-      });
+      if(Meteor.user()) {
+        Images.insert({
+          img_src: event.target.img_src.value,
+          img_alt: event.target.label.value,
+          label: event.target.label.value,
+          description: event.target.description.value,
+          createdOn: new Date(),
+          createdBy: Meteor.user()._id
+        });
+      }
+      
       $("#image_add_form").modal('hide');
       return false;
     },
