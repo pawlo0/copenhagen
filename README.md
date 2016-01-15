@@ -32,3 +32,4 @@ by University of London, Goldsmiths, University of London**
 - Customising the user registration form
 - Attaching users to images
 - Filtering images by user
+- Removing the image filter

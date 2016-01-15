@@ -72,6 +72,9 @@
       {{/if}}
     </div>
   </div>
+  {{#if filtering_images}}
+    Filtering images posted by: <strong>{{getFilterUser}}</strong>.<a href="#" class="js-unset-image-filter">Show all images</a>
+  {{/if}}
   {{#each images}}
     {{> imagesRow }}
   {{/each}}

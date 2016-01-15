@@ -33,6 +33,20 @@ if (Meteor.isClient) {
         chunks.push({row: all});
         
         return chunks;
+    },
+    filtering_images: function(){
+      if (Session.get("userFilter")){
+        return true;
+      } else {
+        return false;
+      }
+    },
+    getFilterUser: function () {
+      if (Session.get("userFilter")){
+        return Meteor.users.findOne({_id:Session.get("userFilter")}).username;
+      } else {
+        return false;
+      }
     }
   });
   Template.individualImage.helpers({
@@ -69,6 +83,9 @@ if (Meteor.isClient) {
     },
     'click .js-set-image-filter': function(event){
       Session.set("userFilter", this.createdBy)
+    },
+    'click .js-unset-image-filter': function(event){
+      Session.set("userFilter", undefined)
     }
   });
   
