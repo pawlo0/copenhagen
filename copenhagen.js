@@ -1,3 +1,4 @@
+/*global Images*/
 Images = new Mongo.Collection("images");
 
 
@@ -17,7 +18,11 @@ if (Meteor.isClient) {
   
   Template.images.helpers({
     images: function () {
-        var all = Images.find({}, {sort:{createdOn: -1, rating:-1}}).fetch();
+        if (Session.get("userFilter")){
+          var all = Images.find({createdBy: Session.get("userFilter")}, {sort:{createdOn: -1, rating:-1}}).fetch();
+        } else {
+          var all = Images.find({}, {sort:{createdOn: -1, rating:-1}}).fetch();
+        }
         var chunks = [];
         var size = 4;
 
@@ -61,6 +66,9 @@ if (Meteor.isClient) {
     },
     'click .js-image-add': function(event){
       $("#image_add_form").modal('show');
+    },
+    'click .js-set-image-filter': function(event){
+      Session.set("userFilter", this.createdBy)
     }
   });
   
