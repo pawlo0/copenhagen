@@ -1,5 +1,43 @@
 /*global Images*/
 
+
+// Routing ----------------------------------------------------------------------------------------------------------------------
+
+Router.configure({
+  layoutTemplate: 'applicationLayout'
+});
+
+
+Router.route('/', function () {
+  this.render('welcome', {
+    to: "main"
+  });
+});
+
+Router.route('/images', function () {
+  this.render('navbar', {
+    to: "navbar"
+  });
+  this.render('images', {
+    to: "main"
+  });
+});
+
+Router.route('/image/:_id', function () {
+  this.render('navbar', {
+    to: "navbar"
+  });
+  this.render('singleImage', {
+    to: "main",
+    data: function(){
+      return Images.findOne({_id: this.params._id})
+    }
+  });
+});
+
+
+// Infinte Scrolling ------------------------------------------------------------------------------------------------------------
+
 Session.set("imageLimit", 8);
 var lastScrollTop = 0;
 $(window).scroll(function(){
@@ -12,6 +50,8 @@ $(window).scroll(function(){
   }
 });
 
+
+// Account config ---------------------------------------------------------------------------------------------------------------
 Accounts.ui.config({
   passwordSignupFields: "USERNAME_AND_EMAIL"
 });
@@ -23,6 +63,11 @@ Template.body.helpers({
     }
   }  
 });
+
+
+
+
+// Images helpers and events ----------------------------------------------------------------------------------------------------
 
 Template.images.helpers({
   images: function () {
@@ -57,22 +102,16 @@ Template.images.helpers({
     }
   }
 });
-Template.individualImage.helpers({
-  getUser: function(userId) {
-    if (userId) {
-      return Meteor.users.findOne({_id: userId}).username
-    } else {
-      return "System"
-    }
-  }
-});
+
 
 Template.images.events({
+/*  
   "click .js-image": function(event){
     var image_src = $(event.currentTarget).attr("src");
     $('#image_modal').attr("src", image_src);
     $('#imageModal').modal('show');
   },
+*/
   'click .js-del-image': function(event){
     var image_id = this._id;
     $("#"+image_id).hide('slow', function(){
@@ -97,6 +136,20 @@ Template.images.events({
   }
 });
 
+// Individual image helper ------------------------------------------------------------------------------------------------------
+
+Template.individualImage.helpers({
+  getUser: function(userId) {
+    if (userId) {
+      return Meteor.users.findOne({_id: userId}).username
+    } else {
+      return "System"
+    }
+  }
+});
+
+
+// Add images form events ------------------------------------------------------------------------------------------------------- 
 Template.image_add_form.events({
   'submit .js-add-image':function(event){
     if(Meteor.user()) {
