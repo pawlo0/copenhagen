@@ -3,7 +3,19 @@ Images = new Mongo.Collection("images");
 
 
 if (Meteor.isClient) {
-
+  
+  Session.set("imageLimit", 8);
+  var lastScrollTop = 0;
+  $(window).scroll(function(){
+    if($(window).scrollTop() + $(window).height() > $(document).height() - 100){
+      var scrollTop = $(this).scrollTop();
+      if (scrollTop > lastScrollTop) {
+        Session.set("imageLimit", Session.get("imageLimit") + 4);
+      }
+      lastScrollTop = scrollTop;
+    }
+  });
+  
   Accounts.ui.config({
     passwordSignupFields: "USERNAME_AND_EMAIL"
   });
@@ -19,9 +31,9 @@ if (Meteor.isClient) {
   Template.images.helpers({
     images: function () {
         if (Session.get("userFilter")){
-          var all = Images.find({createdBy: Session.get("userFilter")}, {sort:{createdOn: -1, rating:-1}}).fetch();
+          var all = Images.find({createdBy: Session.get("userFilter")}, {sort:{createdOn: -1, rating:-1}, limit: Session.get("imageLimit")}).fetch();
         } else {
-          var all = Images.find({}, {sort:{createdOn: -1, rating:-1}}).fetch();
+          var all = Images.find({}, {sort:{createdOn: -1, rating:-1}, limit: Session.get("imageLimit")}).fetch();
         }
         var chunks = [];
         var size = 4;

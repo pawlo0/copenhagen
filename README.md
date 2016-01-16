@@ -33,3 +33,4 @@ by University of London, Goldsmiths, University of London**
 - Attaching users to images
 - Filtering images by user
 - Removing the image filter
+- Infinite scroll

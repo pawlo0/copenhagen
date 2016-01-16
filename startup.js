@@ -1,7 +1,7 @@
 if (Meteor.isServer) {
     Meteor.startup(function(){
         if (Images.find().count() == 0) {
-            //for (var i=0; i<3; i++){
+            for (var i=0; i<3; i++){
                 var time = new Date();
                 Images.insert(
                     {
@@ -39,7 +39,7 @@ if (Meteor.isServer) {
                         createdOn: time
                     }                 
                     );                
-            //} // end for
+            } // end for
         
             console.log("startup.js says: "+Images.find().count());
         } // end if no images
