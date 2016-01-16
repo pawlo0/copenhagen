@@ -34,3 +34,7 @@ by University of London, Goldsmiths, University of London**
 - Filtering images by user
 - Removing the image filter
 - Infinite scroll
+
+**Week 4 ():**
+- Deploying Meteor.js applications
+- How to organise your code
