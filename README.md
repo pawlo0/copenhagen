@@ -39,3 +39,4 @@ by University of London, Goldsmiths, University of London**
 - Deploying Meteor.js applications
 - How to organise your code
 - Make your site more secure
+- Tidy up the project
